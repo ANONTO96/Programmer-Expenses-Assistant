@@ -2,27 +2,34 @@
 let count = 0;
 // add event listener for calculate btn
 const calculateBtn = document.getElementById('calculate').addEventListener('click',function(){
+    // getting value without function
 
-    const income = parseFloat(document.getElementById('income').value);
-    const software = parseFloat(document.getElementById('software').value);
-    const courses = parseFloat(document.getElementById('courses').value);
-    const internet = parseFloat(document.getElementById('internet').value);
+    // const income = parseFloat(document.getElementById('income').value);
+    // const software = parseFloat(document.getElementById('software').value);
+    // const courses = parseFloat(document.getElementById('courses').value);
+    // const internet = parseFloat(document.getElementById('internet').value);
+ 
+    //getting value by calling function 
+    const income = getInputValueById('income');
+    const software = getInputValueById('software');
+    const courses = getInputValueById('courses');
+    const internet = getInputValueById('internet');
 
     // validation for inputs
     if(income <= 0){
-        document.getElementById('income-error').classList.remove('hidden');
+        removeHidden('income-error')
         return;
     }
     if(software <= 0 || software >=income){
-        document.getElementById('software-error').classList.remove('hidden');
+        removeHidden('software-error')
         return;
     }
     if(courses <= 0 || courses >=income){
-        document.getElementById('courses-error').classList.remove('hidden');
+        removeHidden('courses-error')
         return;
     }
     if(internet <= 0 || internet >=income){
-        document.getElementById('internet-error').classList.remove('hidden');
+        removeHidden('internet-error')
         return;
     }
      
@@ -31,7 +38,7 @@ const calculateBtn = document.getElementById('calculate').addEventListener('clic
     const balance = income - totalExpenses;
 
     if(totalExpenses > income){
-    document.getElementById('logic-error').classList.remove('hidden');
+        removeHidden('logic-error')
     return;
     }
 
@@ -60,14 +67,14 @@ const calculateBtn = document.getElementById('calculate').addEventListener('clic
 // add event listener for calculate savings btn
 const calculateSavingsBtn = document.getElementById('calculate-savings').addEventListener('click',function(){
 const savingPercentage = parseFloat(document.getElementById('savings').value);
-const income = parseFloat(document.getElementById('income').value);
-const software = parseFloat(document.getElementById('software').value);
-const courses = parseFloat(document.getElementById('courses').value);
-const internet = parseFloat(document.getElementById('internet').value);
+const income = getInputValueById('income');
+const software = getInputValueById('software');
+const courses = getInputValueById('courses');
+const internet = getInputValueById('internet');
 
 // validation
 if(savingPercentage <= 0 || savingPercentage >100){
-    document.getElementById('savings-error').classList.remove('hidden');
+    removeHidden('savings-error')
     return;
 }
 
@@ -92,9 +99,9 @@ historyTab.addEventListener('click',function(){
     assistantTab.classList.add('text-gray-600');
     assistantTab.classList.remove("text-white", "bg-gradient-to-r", "from-blue-500", "to-purple-600");
 
-document.getElementById('expense-form').classList.add('hidden')
-document.getElementById('results').classList.remove('hidden')
-document.getElementById('history-section').classList.remove('hidden')
+addHidden('expense-form')
+removeHidden('results')
+removeHidden('history-section')
 });
 // assistant tab functionality
 assistantTab.addEventListener('click',function(){
@@ -104,9 +111,9 @@ assistantTab.addEventListener('click',function(){
     historyTab.classList.add('text-gray-600');
     historyTab.classList.remove("text-white", "bg-gradient-to-r", "from-blue-500", "to-purple-600");
 
-document.getElementById('expense-form').classList.remove('hidden')
-document.getElementById('results').classList.add('hidden')
-document.getElementById('history-section').classList.add('hidden')
+    removeHidden('expense-form')
+    addHidden('results')
+    addHidden('history-section')
 })
 
 // live validation for input
